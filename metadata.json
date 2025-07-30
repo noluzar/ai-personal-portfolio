@@ -1,0 +1,6 @@
+{
+  "name": "AI Portfolio Assistant",
+  "description": "An AI-powered portfolio website that allows users to chat with an AI assistant to learn about Nkosinathi Sibiya's professional background, skills, and experience, based on a user-provided screenshot.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
