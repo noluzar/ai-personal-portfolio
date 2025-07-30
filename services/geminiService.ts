@@ -4,15 +4,12 @@ let chatInstance: Chat | null = null;
 let initializationPromise: Promise<Chat | null> | null = null;
 
 async function initializeAi(): Promise<Chat | null> {
-  // If initialization is already complete, return the instance.
   if (chatInstance) return chatInstance;
-  // If initialization is in progress, wait for it to complete.
   if (initializationPromise) return initializationPromise;
 
-  // Start the initialization process. This will only run once.
   initializationPromise = new Promise(async (resolve) => {
-    // Safely check for the API key in a browser-friendly way.
-    const API_KEY = (globalThis as any).process?.env?.API_KEY;
+    // Load API key properly using Vite env variables
+    const API_KEY = import.meta.env.VITE_API_KEY;
 
     if (!API_KEY) {
       console.warn("Gemini API key not found. AI features will be disabled.");
