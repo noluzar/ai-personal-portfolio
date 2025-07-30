@@ -164,7 +164,7 @@ const ChatView: React.FC<{ isAiAvailable: boolean | null }> = ({ isAiAvailable }
             onChange={(e) => setInput(e.target.value)}
             placeholder={
               isAiAvailable === false 
-                ? "AI assistant is currently unavailable." 
+                ? "AI assistant is unavailable. The host application must provide an API key." 
                 : "Ask me anything about Noluthando - her experience, skills, or anything else!"
             }
             className="w-full bg-neutral-800 border-neutral-700 rounded-lg px-4 py-2.5 text-neutral-100 focus:ring-2 focus:ring-orange-500 focus:outline-none disabled:opacity-60"
