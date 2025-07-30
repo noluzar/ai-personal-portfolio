@@ -3,7 +3,7 @@ import { SKILLS_DATA } from '../constants';
 import { ComputerDesktopIcon, WrenchScrewdriverIcon, CircleStackIcon, Cog6ToothIcon, StarIcon } from './icons';
 
 const levelColorMap: { [key: string]: string } = {
-  'Advanced': 'bg-green-500 text-white',
+  'Junior': 'bg-green-500 text-white',
   'Intermediate': 'bg-orange-500 text-white',
 };
 

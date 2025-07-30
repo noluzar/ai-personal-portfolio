@@ -35,18 +35,18 @@ export const SUGGESTED_PROMPTS = [
 
 export const SKILLS_DATA: { [key: string]: { name: string; level: string; years: string }[] } = {
   'Programming Languages': [
-    { name: 'Python', level: 'Intermediate', years: '2 years' },
-    { name: 'JavaScript', level: 'Advanced', years: '3 years' },
-    { name: 'TypeScript', level: 'Intermediate', years: '2 years' },
+    { name: 'Python', level: 'Intermediate', years: '3+ years' },
+    { name: 'JavaScript', level: 'Intermediate', years: '2+ years' },
+    { name: 'TypeScript', level: 'Junior', years: '1+ years' },
   ],
   'Frameworks and Libraries': [
-    { name: 'React', level: 'Advanced', years: '3 years' },
-    { name: 'Node.js', level: 'Intermediate', years: '1 year' },
-    { name: 'Express.js', level: 'Intermediate', years: '1 year' },
+    { name: 'React', level: 'Intermediate', years: '2 years' },
+    { name: 'Node.js', level: 'Junior', years: '1+ years' },
+    { name: 'Express.js', level: 'Junior', years: '1 year' },
   ],
   'Databases': [
-    { name: 'MySQL', level: 'Intermediate', years: '1 year' },
-    { name: 'MongoDB', level: 'Intermediate', years: '1 year' },
+    { name: 'MySQL', level: 'Intermediate', years: '2+ year' },
+    { name: 'MongoDB', level: 'Junior', years: '1 year' },
   ],
   'Tools & Technologies': [
     { name: 'Azure', level: 'Intermediate', years: '1 year' },
@@ -60,20 +60,21 @@ export const SKILLS_DATA: { [key: string]: { name: string; level: string; years:
     { name: 'Microsoft Azure Fundamentals (AZ-900)', level: '', years: '' },
     { name: 'Google Certified Cybersecurity Professional', level: '', years: '' },
     { name: 'Google IT Automation with Python', level: '', years: '' },
+    { name: 'Microsoft AI Fundamentals (AI-900)', level: '', years: '' },
   ]
 };
 
 export const EXPERIENCE_DATA = [
   {
     title: 'Tech Associate',
-    company: 'Innovate Forward',
+    company: 'CAPACITI',
     location: 'Johannesburg, South Africa',
-    timeline: '2023 - Present',
+    timeline: 'Current',
     responsibilities: [
       'Assists the development team with testing, documentation, and foundational frontend tasks using HTML, CSS, and JavaScript.',
       'Gaining valuable exposure to React and cloud services.',
     ],
-    technologies: ['HTML', 'CSS', 'JavaScript', 'React'],
+    technologies: ['AI', 'Python', 'Professional development'],
   },
   {
     title: 'Software Developer',
@@ -137,23 +138,22 @@ export const PROJECTS_DATA = [
 export const JOURNEY_DATA = [
   {
     title: "CAPACITI Hackathon Winner",
-    date: "2023",
-    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop',
+    date: "2025",
+    imageUrl: '/unnamed.jpg',
     description: "One of my proudest moments was winning a hackathon hosted by CAPACITI, where my team and I collaborated on building a functional prototype to address a real-world challenge.",
   },
   {
     title: "Salesforce Agent Tour – Event Experience",
-    date: "2024",
-    imageUrl: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop',
-    description: "Attended the Salesforce Agent Tour, an interactive event designed to explore the latest innovations in Salesforce solutions. Gained hands-on exposure to Salesforce products, including Sales Cloud, Service Cloud, and AI-driven CRM capabilities. Engaged with industry experts, participated in live demos, and learned best practices for leveraging Salesforce to drive customer success. This experience enhanced my understanding of cloud-based CRM strategies and expanded my professional network within the Salesforce ecosystem.",
+    date: "2025",
+    imageUrl: '/salesforce.jpg',
+    description: "Attended the Salesforce Agent Tour, an interactive event designed to explore the latest innovations in Salesforce solutions. Gained hands-on exposure to Salesforce products, including Sales Cloud, Service Cloud, and AI-driven CRM capabilities. Engaged with industry experts, participated in live demos, and learned best practices for leveraging Salesforce to drive customer success.",
   },
 ];
 
 export const ACADEMIC_SUBJECTS = [
-  { name: 'Software Development Principles', icon: <ComputerDesktopIcon className="w-6 h-6 text-orange-400 flex-shrink-0" /> },
+  { name: 'Web Development Principles', icon: <ComputerDesktopIcon className="w-6 h-6 text-orange-400 flex-shrink-0" /> },
   { name: 'Database Management Systems', icon: <CircleStackIcon className="w-6 h-6 text-orange-400 flex-shrink-0" /> },
   { name: 'Web Technologies', icon: <GlobeAltIcon className="w-6 h-6 text-orange-400 flex-shrink-0" /> },
   { name: 'System Analysis & Design', icon: <ChartBarIcon className="w-6 h-6 text-orange-400 flex-shrink-0" /> },
   { name: 'Network and Communication Technologies', icon: <LinkIcon className="w-6 h-6 text-orange-400 flex-shrink-0" /> },
-  { name: 'Project Management', icon: <ClipboardDocumentListIcon className="w-6 h-6 text-orange-400 flex-shrink-0" /> },
 ];

@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeCategory, setActiveCategory }) 
       <div className="flex flex-col items-center md:items-start text-center md:text-left">
         <div className="relative mb-4">
           <img
-            src="https://picsum.photos/seed/portfolio-her/128/128"
+            src="/(1).jpg"
             alt="Noluthando Ndlovu"
             className="w-24 h-24 rounded-full border-4 border-orange-500 object-cover"
           />
