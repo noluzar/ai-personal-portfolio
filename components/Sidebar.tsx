@@ -10,7 +10,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ activeCategory, setActiveCategory }) => {
   return (
     <div className="w-full md:w-80 lg:w-96 bg-neutral-800 p-6 flex flex-col flex-shrink-0">
-      <div className="flex flex-col items-center md:items-start text-center md:text-left">
+      <div className="flex flex-col items-center text-center md:text-left cursor-pointer">
         <div className="relative mb-4">
           <img
             src="/(1).jpg"
@@ -20,7 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeCategory, setActiveCategory }) 
            <div className="absolute bottom-0 right-0 w-6 h-6 bg-orange-500 rounded-full border-2 border-neutral-800"></div>
         </div>
         <h1 className="text-2xl font-bold text-neutral-100">Noluthando Ndlovu</h1>
-        <p className="text-md text-neutral-400">Tech associate | Aspiring Software Engineer</p>
+        <p className="text-md text-neutral-400">Tech associate | Software Developer</p>
       </div>
 
       <div className="mt-10">
