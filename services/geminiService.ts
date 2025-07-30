@@ -1,31 +1,58 @@
+
 import { GoogleGenAI, Chat } from "@google/genai";
 
 let chatInstance: Chat | null = null;
 let initializationPromise: Promise<Chat | null> | null = null;
 
-async function initializeAi(): Promise<Chat | null> {
-  // If initialization is already complete, return the instance.
-  if (chatInstance) return chatInstance;
-  // If initialization is in progress, wait for it to complete.
-  if (initializationPromise) return initializationPromise;
+/**
+ * Creates a promise that resolves with an API key.
+ * It primarily listens for a 'message' from a parent frame, which is a secure
+ * way to provide keys in a deployed/embedded environment.
+ * It includes a timeout and a fallback to `process.env.API_KEY` for local development.
+ */
+function getApiKeyFromHost(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const handleMessage = (event: MessageEvent) => {
+      // Basic validation for the message structure
+      if (event.data && event.data.type === 'API_KEY' && typeof event.data.apiKey === 'string') {
+        console.log("API Key received from host.");
+        window.removeEventListener('message', handleMessage);
+        clearTimeout(timer);
+        resolve(event.data.apiKey);
+      }
+    };
 
-  // Start the initialization process. This will only run once.
-  initializationPromise = new Promise(async (resolve) => {
-    // Safely check for the API key in a browser-friendly way.
-    const API_KEY = (globalThis as any).process?.env?.API_KEY;
+    window.addEventListener('message', handleMessage);
 
-    if (!API_KEY) {
-      console.warn("Gemini API key not found. AI features will be disabled.");
-      resolve(null);
-      return;
+    // Set a timeout to avoid waiting indefinitely.
+    const timer = setTimeout(() => {
+      window.removeEventListener('message', handleMessage);
+      
+      // Fallback for local development environments
+      const apiKeyFromEnv = (globalThis as any).process?.env?.API_KEY;
+      if (apiKeyFromEnv) {
+        console.log("Using API key from local environment variable.");
+        resolve(apiKeyFromEnv);
+      } else {
+        reject(new Error("Timeout: API key not received from host and not found in local environment variables."));
+      }
+    }, 2500);
+  });
+}
+
+async function initializeAiInternal(): Promise<Chat | null> {
+  try {
+    const apiKey = await getApiKeyFromHost();
+
+    if (!apiKey) {
+      throw new Error("API Key was not provided.");
     }
 
-    try {
-      const ai = new GoogleGenAI({ apiKey: API_KEY });
-      const chat = ai.chats.create({
-        model: 'gemini-2.5-flash',
-        config: {
-          systemInstruction: `You are Astra, a specialized AI assistant for the portfolio of Noluthando Ndlovu. You are friendly, encouraging, and professional. Your purpose is to provide information about Noluthando's career journey and aspirations.
+    const ai = new GoogleGenAI({ apiKey: apiKey });
+    const chat = ai.chats.create({
+      model: 'gemini-2.5-flash',
+      config: {
+        systemInstruction: `You are Astra, a specialized AI assistant for the portfolio of Noluthando Ndlovu. You are friendly, encouraging, and professional. Your purpose is to provide information about Noluthando's career journey and aspirations.
 
                 Here is the information you must use to answer questions. Do not invent information. If you don't know the answer, say that you don't have that information.
 
@@ -91,18 +118,26 @@ async function initializeAi(): Promise<Chat | null> {
                 - Keep answers concise but informative.
                 - Use emojis sparingly to add a friendly touch.
                 - Format lists with markdown for better readability.`,
-        },
-      });
-      console.log("Gemini AI initialized successfully.");
-      chatInstance = chat;
-      resolve(chatInstance);
-    } catch (error) {
-      console.error("Failed to initialize Gemini AI:", error);
-      chatInstance = null;
-      resolve(null);
-    }
-  });
+      },
+    });
+    console.log("Gemini AI initialized successfully.");
+    chatInstance = chat;
+    return chatInstance;
+  } catch (error) {
+    console.error("Failed to initialize Gemini AI:", error);
+    chatInstance = null;
+    return null;
+  }
+}
 
+/**
+ * Memoized function to initialize the AI service.
+ * Ensures that the initialization process is only attempted once.
+ */
+function initializeAi(): Promise<Chat | null> {
+  if (!initializationPromise) {
+    initializationPromise = initializeAiInternal();
+  }
   return initializationPromise;
 }
 
@@ -119,7 +154,7 @@ export async function sendMessageStream(
   const model = await initializeAi();
 
   if (!model) {
-    onChunk("Sorry, the AI assistant is currently unavailable due to a configuration issue.");
+    onChunk("Sorry, the AI assistant is currently unavailable. Please ensure the API key is configured correctly by the host application.");
     onComplete();
     return;
   }
