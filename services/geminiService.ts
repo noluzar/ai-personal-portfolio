@@ -12,17 +12,30 @@ async function initializeAi(): Promise<Chat | null> {
 
   // Start the initialization process. This will only run once.
   initializationPromise = new Promise(async (resolve) => {
-    // Safely check for the API key in a browser-friendly way.
-    const API_KEY = (globalThis as any).process?.env?.API_KEY;
+    let apiKey: string | null | undefined = null;
 
-    if (!API_KEY) {
+    // 1. Check for API key in URL query parameters.
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      apiKey = urlParams.get('apiKey');
+    } catch (e) {
+      // Running in an environment without 'window', so skipping URL check.
+    }
+    
+    // 2. If not in URL, check for environment variable.
+    if (!apiKey) {
+      // Safely check for the API key in a browser-friendly way.
+      apiKey = (globalThis as any).process?.env?.API_KEY;
+    }
+
+    if (!apiKey) {
       console.warn("Gemini API key not found. AI features will be disabled.");
       resolve(null);
       return;
     }
 
     try {
-      const ai = new GoogleGenAI({ apiKey: API_KEY });
+      const ai = new GoogleGenAI({ apiKey: apiKey });
       const chat = ai.chats.create({
         model: 'gemini-2.5-flash',
         config: {
