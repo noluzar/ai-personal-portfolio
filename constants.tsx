@@ -71,8 +71,7 @@ export const EXPERIENCE_DATA = [
     location: 'Johannesburg, South Africa',
     timeline: 'Current',
     responsibilities: [
-      'Assists the development team with testing, documentation, and foundational frontend tasks using HTML, CSS, and JavaScript.',
-      'Gaining valuable exposure to React and cloud services.',
+      ''
     ],
     technologies: ['AI', 'Python', 'Professional development'],
   },
