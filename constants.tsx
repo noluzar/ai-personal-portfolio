@@ -71,7 +71,8 @@ export const EXPERIENCE_DATA = [
     location: 'Johannesburg, South Africa',
     timeline: 'Current',
     responsibilities: [
-      ''
+      'Gained hands-on experience with AI concepts and tools, including machine learning fundamentals and practical use of AI platforms.',
+      'Developed and deployed AI-driven prototype solutions, applying skills in data analysis, natural language processing (NLP), and model evaluation.'
     ],
     technologies: ['AI', 'Python', 'Professional development'],
   },
